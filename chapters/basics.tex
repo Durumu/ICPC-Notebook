@@ -1,13 +1,13 @@
-\documentclass[../../main]{subfiles}
+\documentclass[../main]{subfiles}
 
 \begin{document}
 
-\section{The Skeleton}
+\section{Template}
     \subsubsection*{The Mother Program}
         Every C++ program should begin with this.
         The \code{\#include} statement will bring in the entire C++11 STL when compiled with \code{g++}, and the strange I/O statements will prevent standard IO from syncing with each other. This will speed up a program that reads from stdout/stdin substantially, at the cost of making \code{scanf} and \code{printf} completely unusable, so use only if you plan on using purely \code{cin} and \code{cout}.
         
-        \cppfile{skeleton}
+        \cppfile{basic/skeleton}
 
     \subsubsection*{Makefile}
     To compile programs, use the following makefile, which incorporates the exact command used by the judges:
@@ -18,11 +18,7 @@
         rm main
     \end{cpp}
 
-\subsection{Defines}
-    The following \code{\#define}s are \textit{assumed} to be present for every code snippet in this entire notebook, but not all must be typed out for every problem.
-    \begin{cpp}
-        #define LSB(i) ((i) & (-i))
-        #define mid(a,b) ((a) + ((b)-(a))/2)
-    \end{cpp}
+\subsection{Important Note on Snippets}
+    The snippets in this book are \textbf{ALL} written under the assumption that they are being inserted into the skeleton delineated above, i.e. they operate assuming full access to all headers in the C++11 STL using the \code{std} namespace. \textbf{DO NOT USE THEM} without this. You have been warned!
 
 \end{document}

@@ -1,0 +1,42 @@
+\documentclass[../main]{subfiles}
+    
+\begin{document}
+
+\section{Modular Arithmetic}
+
+
+
+\subsection{GCD and LCM}
+
+\cppfile{numtheory/gcd}
+
+\subsection{Chinese Remainder Theorem}
+
+\subsection{Legendre's Formula}
+
+Given a prime number $p$ and natural number $n$, the largest natural number $x$ such that $n!$ is evenly divisible by $p^x$ is $\sum_{i}\floor*{\frac{n}{p^i}}$.
+
+\section{Primes}
+
+\subsection{Prime Facts}
+
+\subsubsection*{The Prime Number Theorem}
+
+$\pi(x)$, the number of primes less than some $x\in\mathbb{N}$, grows 
+at almost exactly the same rate as $frac{x}{\log{x}-1}$.
+
+\subsubsection*
+
+\subsection{The Sieve of Eratosthenes}
+
+The sieve of Eratosthenes is an extremely efficient and useful algorithm, finding all primes up to $n$ in $O(n\log\log{n})$.
+
+\cppfile{numtheory/primesieve}
+
+Generally, the obvious use is sufficient. However, sometimes, e.g. when checking a few very large numbers for primality, it is best to create a prime sieve of size $\sqrt{n}$, where $n$ is the largest number, then use the sieve to create a sorted vector of all primes up to $\sqrt{n}$ and test each of these individually. This technique is also helpful for efficient factorization of large numbers (in $O(log n)$) through continuous division.
+
+\cppfile{numtheory/primes_to}
+
+\section 
+
+\end{document}    

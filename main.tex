@@ -1,8 +1,16 @@
 \documentclass{report}
 
+  % Meta
+  \usepackage{subfiles}
+
+  % Code
   \usepackage{listings}
   \usepackage{color}
-  \usepackage{subfiles}
+
+  % Math
+  \usepackage{amsmath}
+  \usepackage{amsfonts}
+  \usepackage{mathtools}
 
   \definecolor{dkgreen}{rgb}{0,0.6,0}
   \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -24,28 +32,52 @@
   stringstyle=\color{mauve},
   breaklines=true,
   breakatwhitespace=true,
-  tabsize=3
+  tabsize=4
 }
 
 \def\code#1{\texttt{#1}}
 \newcommand{\cppfile}[1]{\lstinputlisting{code/#1.cpp}}
 \newcommand{\pyfile}[1]{\lstinputlisting[language=Python]{code/#1.py}}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
 \lstnewenvironment{cpp} {
   \lstset{
+    frame=tb,
     language=[ISO]C++,
-    basicstyle=\ttfamily,
+    aboveskip=2mm,
+    belowskip=2mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=none,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
     breaklines=true,
-    columns=fullflexible
-    }
+    breakatwhitespace=true,
+    tabsize=4
+  }
 } {}
 
 \lstnewenvironment{py} {
   \lstset{
+    frame=tb,
     language=Python,
-    basicstyle=\ttfamily,
+    aboveskip=2mm,
+    belowskip=2mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=none,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
     breaklines=true,
-    columns=fullflexible
+    breakatwhitespace=true,
+    tabsize=4
     }
 } {}
 
@@ -61,10 +93,10 @@
 
 \tableofcontents
 
-\chapter{}
-  \subfile{chapters/basic/basic}
+\chapter{The Basics}
+  \subfile{chapters/basics}
 
-%\chapter{Number Theory}
-%\input{chapters/numtheory/numtheory}
+\chapter{Number Theory}
+  \subfile{chapters/numtheory}
 
 \end{document}
