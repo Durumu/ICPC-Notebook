@@ -217,5 +217,8 @@ TSWLatexianTemp*
 # auto folder when using emacs and auctex
 /auto/*
 
+# weird accidental binaries
+*.exe
+
 # expex forward references with \gathertags
 *-tags.tex
