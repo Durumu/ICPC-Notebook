@@ -1,0 +1,28 @@
+\documentclass[../../main]{subfiles}
+
+\begin{document}
+
+\section{The Skeleton}
+    \subsubsection*{The Mother Program}
+        Every C++ program should begin with this.
+        The \code{\#include} statement will bring in the entire C++11 STL when compiled with \code{g++}, and the strange I/O statements will prevent standard IO from syncing with each other. This will speed up a program that reads from stdout/stdin substantially, at the cost of making \code{scanf} and \code{printf} completely unusable, so use only if you plan on using purely \code{cin} and \code{cout}.
+        
+        \cppfile{skeleton}
+
+    \subsubsection*{Makefile}
+    To compile programs, use the following makefile, which incorporates the exact command used by the judges:
+    \begin{cpp}
+    main: main.cpp
+        g++ -g -lm -lcrypt -O2 -std=c++11 main.cpp -o main
+    clean:
+        rm main
+    \end{cpp}
+
+\subsection{Defines}
+    The following \code{\#define}s are \textit{assumed} to be present for every code snippet in this entire notebook, but not all must be typed out for every problem.
+    \begin{cpp}
+        #define LSB(i) ((i) & (-i))
+        #define mid(a,b) ((a) + ((b)-(a))/2)
+    \end{cpp}
+
+\end{document}
