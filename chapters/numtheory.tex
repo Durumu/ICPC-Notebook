@@ -4,61 +4,61 @@
 
 Unless explicitly stated otherwise, numbers are assumed to belong to $\mathbb{N}$.
 
+\section{Definitions}
+
+    \begin{itemize}
+    \item
+        A number $p$ is \textit{prime} if its only divisors are 1 and itself.
+    \item 
+        Two numbers $a$ and $b$ are \textit{coprime} if $gcd(a, b) = 1$. 
+    \item
+        A \textit{perfect number} $n$ is equal to the sum of its proper positive divisors (i.e. the divisors less than $n$). All known perfect numbers are even, and of the form $q(q+1)/2$ where $q$ is a \textit{Mersenne prime} (a prime of the form $2^p - 1$ for some prime $p$).
+    \end{itemize}
+
 \section{Primes}
 
-    \subsection{Prime Facts}
+    \subsection{Primes Library}
 
-    \subsubsection*{Definitions}
-
-    A number $p$ is \textit{prime} if its only divisors are 1 and itself. Two numbers $a$ and $b$ are \textit{coprime} if $GCD(a, b) = 1$. 
-
-    \subsubsection*{The Prime Number Theorem}
-
-    $\pi(x)$, the number of primes less than some x, grows 
-    at almost exactly the same rate as $\frac{x}{\log{x}-1}$.
+        \cppfile{numtheory/primes}
 
     \subsection{The Sieve of Eratosthenes}
 
-    The sieve of Eratosthenes is an extremely efficient and useful algorithm, finding all primes up to $n$ in $O(n\log\log{n})$.
+    The \textbf{sieve of Eratosthenes} is an extremely efficient and useful algorithm, finding all primes up to $n$ in $O(n\log\log{n})$.\\
 
-    \cppfile{numtheory/primesieve}
-
-    Generally, the obvious use is sufficient. However, sometimes, e.g. when checking a few very large numbers for primality, it is best to create a prime sieve of size $\sqrt{n}$, where $n$ is the largest number, then use the sieve to create a sorted vector of all primes up to $\sqrt{n}$ and test each of these individually. This technique is also helpful for efficient factorization of large numbers (in $O(log n)$) through continuous division.
-
-        \cppfile{numtheory/primes_to}
+    Generally, the obvious use is sufficient. However, sometimes, e.g. when checking a few very large numbers for primality, it is best to create a prime sieve of size $\sqrt{n}$, where $n$ is the largest number, then use the sieve to create a sorted vector of all primes up to $\sqrt{n}$ and test each of these individually. This technique is also helpful for efficient factorization of large numbers (in $O(\log n)$) through continuous division.
 
     \subsection{Euler's Totient Function}
 
-    Euler's totient function $\phi(n)$ for some $n$ is defined as the number of integers less than $n$ that $n$ is relatively prime with, i.e. whose GCD with $n$ is 1. Computing this in $O(\sqrt{n})$ is easy, and the following solution can easily be optimized for many queries.\\
+    \textbf{Euler's totient function} $\phi(n)$ for some $n$ is defined as the number of integers less than $n$ that $n$ is relatively prime with, i.e. whose GCD with $n$ is 1. Computing this in $O(\sqrt{n})$ is easy, and the following solution can easily be optimized for many $O(\log n)$ queries.\\
 
     $\phi(n)$ has many interesting properties, but the most famous and useful is the fact that $a^{\phi(n)} \equiv 1 \pmod{n}$ for coprime $a$, $n$.
 
-        \cppfile{numtheory/totient}
+    \subsubsection*{The Prime Number Theorem}
+    
+        $\pi(x)$, the number of primes less than some x, grows 
+        at almost exactly the same rate as $\frac{x}{\log{x}-1}$.
 
 \section{Modular Arithmetic}
 
-    \subsection{Euclidean Algorithm}
-
-    Simple $O(\log{min(a, b)})$ algorithm to find the GCD of two numbers $a$ and $b$, or LCM.
+    \subsection{GCD and LCM}
 
         \cppfile{numtheory/gcd}
 
-    \subsection{Modular Inverse}
+    \subsection{Euclid Codebase}
 
-    The \textbf{extended Euclidean algorithm} retains the sublinear time complexity of Euclid's simple algorithm, and for almost no extra cost finds integer coefficients $x$, $y$ for the equation $ax + by = GCD(a, b)$.
-    
         \cppfile{numtheory/euclid}
 
-    This equation is useful because it allows us to find the \textbf{modular inverse} of two numbers $a$ and $m$, i.e. the number $x$ such that $ax \equiv 1 \pmod{m}$, which can then be used for other powerful results, like the Chinese remainder theorem. The reason this works is that a modular inverse for $a \pmod{m}$ is only possible if $a$ and $m$ are coprime, i.e. $gcd(a, m) = 1$. Thus, if $ax + my = 1$, $ax - 1 = (-y)m$, and thus $ax \equiv 1 \pmod{m}$.
+    \subsection{Modular Inverse}
 
-        \cppfile{numtheory/inv}
+    The \textbf{extended Euclidean algorithm} retains the sublinear time complexity of Euclid's simple algorithm, and for almost no extra cost finds integer coefficients $x$, $y$ for the equation $ax + by = gcd(a, b)$.
+    
+
+    This equation is useful because it allows us to find the \textbf{modular inverse} of two numbers $a$ and $m$, i.e. the number $x$ such that $ax \equiv 1 \pmod{m}$, which can then be used for other powerful results, like the Chinese remainder theorem. The reason this works is that a modular inverse for $a \pmod{m}$ is only possible if $a$ and $m$ are coprime, i.e. $gcd(a, m) = 1$. Thus, if $ax + my = 1$, $ax - 1 = (-y)m$, and thus $ax \equiv 1 \pmod{m}$.
 
 
     \subsection{Chinese Remainder Theorem}
 
     The \textbf{Chinese remainder theorem} enables us to solve for the lowest possible $x$ satisfying a system of equations of the form $x\equiv a \pmod {d}$, for two equally-sized vectors $a$ and $d$, provided each pair of elements in $d$ is coprime. This is possible using Euclid's extended algorithm to find the inverse GCD.
-    
-        \cppfile{numtheory/crt}
 
     \subsection{Legendre's Formula}
 

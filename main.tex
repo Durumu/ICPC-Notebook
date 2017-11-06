@@ -1,7 +1,9 @@
 \documentclass{report}
 
-  % Meta
+  % Organization
   \usepackage{subfiles}
+  \usepackage{graphicx}   
+  \usepackage{indentfirst}
 
   % Code
   \usepackage{listings}
@@ -15,6 +17,8 @@
   \definecolor{dkgreen}{rgb}{0,0.6,0}
   \definecolor{gray}{rgb}{0.5,0.5,0.5}
   \definecolor{mauve}{rgb}{0.58,0,0.82}
+
+  \graphicspath{ {images/} }
 
 \lstloadlanguages{[ISO]C++, Python}
 
@@ -35,9 +39,14 @@
   tabsize=4
 }
 
-\def\code#1{\texttt{#1}}
+% Inline monospaced text, such as bash commands
+\newcommand{\code}[1]{\texttt{#1}}
+% Large amounts of monospaced text, such as makefiles
+\newcommand{\monospace}[1]{\noindent\ignorespacesafterend\code{#1}}
+% Large, isolated pieces of code from a file, in C++/Python
 \newcommand{\cppfile}[1]{\lstinputlisting{code/#1.cpp}}
 \newcommand{\pyfile}[1]{\lstinputlisting[language=Python]{code/#1.py}}
+
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
@@ -81,11 +90,11 @@
     }
 } {}
 
-\title{
-	{The Compendium, v0.1}\\
-	{Texas A\&M University}
+\title{The Compendium}
+\author{
+  {Jack Graham}\\	
+  {Texas A\&M University}
 }
-\author{Jack Graham}
 
 \begin{document}
 
@@ -100,7 +109,8 @@
   \subfile{chapters/numtheory}
 
 \chapter{Geometry}
+  \subfile{chapters/geometry}
 
-\chapter{}
+\chapter{Linear Algebra}
 
 \end{document}

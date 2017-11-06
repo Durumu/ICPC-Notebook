@@ -2,23 +2,46 @@
 
 \begin{document}
 
-\section{Template}
-    \subsubsection*{The Mother Program}
-        Every C++ program should begin with this.
-        The \code{\#include} statement will bring in the entire C++11 STL when compiled with \code{g++}, and the strange I/O statements will prevent standard IO from syncing with each other. This will speed up a program that reads from stdout/stdin substantially, at the cost of making \code{scanf} and \code{printf} completely unusable, so use only if you plan on using purely \code{cin} and \code{cout}.
+\section{Setup}
+
+    \subsection{Vim}
+
+        These commands enable syntax highlighting, line-numbering, and auto indentation, and change tab spacing to 4.
+
+        \monospace{
+            \$ vim ~/.vimrc  \\
+            syntax on        \\
+            set ai           \\
+            set number       \\
+            set ts=4
+        }        
+
+    \subsection{Using the Template}
+
+        Use \code{mkdir /tmp/code/ \&\& cd /tmp/code/ \&\& vim template.cpp}, then type the following:
+
+            \cppfile{basic/template}
         
-        \cppfile{basic/skeleton}
+        Then, initialize the directory as follows:\\
+        
+        \monospace{
+            for x in a b c d e f g h i j k;
+            do cp template.cpp \$x.cpp \&\& touch \$x.dat; 
+            done
+        }
 
-    \subsubsection*{Makefile}
-    To compile programs, use the following makefile, which incorporates the exact command used by the judges:
-    \begin{cpp}
-    main: main.cpp
-        g++ -g -lm -lcrypt -O2 -std=c++11 main.cpp -o main
-    clean:
-        rm main
-    \end{cpp}
+    \subsection{Makefile}
+    
+        Use \code{vim Makefile}, then enter the following:\\
+        
+        \monospace{
+            CXX=g++                                     \\
+            CXXFLAGS=-Wall -static -g -O2 -std=gnu++14  \\
+            a: a.cpp                                    \\
+            ...                                         \\
+            k: k.cpp
+        }\\
 
-\subsection{Important Note on Snippets}
-    The snippets in this book are \textbf{ALL} written under the assumption that they are being inserted into the skeleton delineated above, i.e. they operate assuming full access to all headers in the C++11 STL using the \code{std} namespace. \textbf{DO NOT USE THEM} without this. You have been warned!
+        This allows you to type \code{make a \&\& ./a < a.dat} to make and run problem A in one go. The compiler flags used are the same ones used by the SCUSA regionals judge in 2017, plus \code{-Wall} to help with debugging.
 
 \end{document}
