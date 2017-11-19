@@ -6,14 +6,19 @@
 
     \subsection{Vim}
 
-        These commands enable syntax highlighting, line-numbering, and auto indentation, and change tab spacing to 4.
+        My preferred lightweight setup file. The macro at the end makes F5 save, compile, and run the program (pretty neat!)
 
         \monospace{
-            \$ vim ~/.vimrc  \\
-            syntax on        \\
-            set ai           \\
-            set number       \\
-            set ts=4
+            \$ vim ~/.vimrc \\
+            syntax on       \\
+            set ai          \\
+            set nu          \\
+            set ts=4        \\
+            set sw=4        \\
+            set is          \\
+            set hs          \\
+            set bg=dark     \\
+            nnoremap <silent> <F5> :w <bar> :make <bar> :!./main < in.dat
         }        
 
     \subsection{Using the Template}
@@ -43,5 +48,9 @@
         }\\
 
         This allows you to type \code{make a \&\& ./a < a.dat} to make and run problem A in one go. The compiler flags used are the same ones used by the SCUSA regionals judge in 2017, plus \code{-Wall} to help with debugging.
+
+\section{Choice of Programming Language}
+
+    About $10^6$ operations are doable by Python in 30 seconds, while $10^9$ operations can be done by C++. Therefore, Python should only be used if integers are very big (Python's integers are arbitrarily large), if decimals require arbitrary precision (\code{import decimal} will take care of that.), or for problems where speed is not an issue that involve something like string formatting. The judge guarantees problems to be solvable in C++, but does not guarantee them to be solvable in Python. For this reason, the C++ STL is a far better choice for competitive programming, with  vast majority of code written here is in C++. 
 
 \end{document}
