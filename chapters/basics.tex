@@ -4,53 +4,47 @@
 
 \section{Setup}
 
-    \subsection{Vim}
+\subsection{Vim}
 
-        My preferred lightweight setup file. The macro at the end makes F5 save, compile, and run the program (pretty neat!)
+My preferred lightweight setup file. The macro at the end makes F5 save, compile, and run the program.
 
-        \monospace{
-            \$ vim ~/.vimrc \\
-            syntax on       \\
-            set ai          \\
-            set nu          \\
-            set ts=4        \\
-            set sw=4        \\
-            set is          \\
-            set hs          \\
-            set bg=dark     \\
-            nnoremap <silent> <F5> :w <bar> :make <bar> :!./main < in.dat
-        }        
+\monospace{
+    \$ vim ~/.vimrc \\
+    syntax on       \\
+    set nu          \\
+    set ai et sta sw=4 sts=4     \\
+    set is hs       \\
+    set bg=dark     \\
+    nnoremap <silent> <F5> :w <bar> :make <bar> :!./main < in.dat
+}
 
-    \subsection{Using the Template}
+\subsection{Using the Template}
 
-        Use \code{mkdir /tmp/code/ \&\& cd /tmp/code/ \&\& vim template.cpp}, then type the following:
+Use \code{mkdir /tmp/code/ \&\& cd /tmp/code/ \&\& vim template.cpp}, then type the following:
 
-            \cppfile{basic/template}
-        
-        Then, initialize the directory as follows:\\
-        
-        \monospace{
-            for x in a b c d e f g h i j k;
-            do cp template.cpp \$x.cpp \&\& touch \$x.dat; 
-            done
-        }
+\cppfile{basic/template}
 
-    \subsection{Makefile}
-    
-        Use \code{vim Makefile}, then enter the following:\\
-        
-        \monospace{
-            CXX=g++                                     \\
-            CXXFLAGS=-Wall -static -g -O2 -std=gnu++14  \\
-            a: a.cpp                                    \\
-            ...                                         \\
-            k: k.cpp
-        }\\
+Then, initialize the directory as follows:\\
 
-        This allows you to type \code{make a \&\& ./a < a.dat} to make and run problem A in one go. The compiler flags used are the same ones used by the SCUSA regionals judge in 2017, plus \code{-Wall} to help with debugging.
+\monospace{
+    for x in a b c d e f g h i j k;
+    do cp template.cpp \$x.cpp \&\& touch \$x.dat; 
+    done
+}
+
+\subsection{Makefile}
+
+Use \code{vim Makefile}, then enter the following:\\
+
+\monospace{
+    CXX=g++                                     \\
+    CXXFLAGS=-Wall -static -g -O2 -std=gnu++14  \\
+}\\
+
+This allows you to type \code{make a \&\& ./a < a.dat} to make and run problem A in one go. The compiler flags used are the same ones used by the SCUSA regionals judge in 2017, plus \code{-Wall} to help with debugging.
 
 \section{Choice of Programming Language}
 
-    About $10^6$ operations are doable by Python in 30 seconds, while $10^9$ operations can be done by C++. Therefore, Python should only be used if integers are very big (Python's integers are arbitrarily large), if decimals require arbitrary precision (\code{import decimal} will take care of that.), or for problems where speed is not an issue that involve something like string formatting. The judge guarantees problems to be solvable in C++, but does not guarantee them to be solvable in Python. For this reason, the C++ STL is a far better choice for competitive programming, with  vast majority of code written here is in C++. 
+About $10^6$ operations are doable by Python in 30 seconds, while $10^9$ operations can be done by C++. Therefore, Python should only be used if integers are very big (Python's integers are arbitrarily large), if decimals require arbitrary precision (\code{import decimal} will take care of that.), or for problems where speed is not an issue that involve something like string formatting. 
 
 \end{document}

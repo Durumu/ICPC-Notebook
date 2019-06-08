@@ -4,36 +4,68 @@
 
 \section{Input and Output}
 
-    The bread and butter of every program. This is what you use to read from stdin and write to stdout, in the form of \code{cin} and \code{cout}. I use the headers \code{<iostream>}, \code{sstream}, and \code{<iomanip>} for this purpose. Some people prefer \code{<cstdio>}, which is about a hundred times faster by default, but with the tricks I use in my template file, is not significantly faster, at least not enough to offset the unbelievable headache that is \code{scanf}.\\
-    
-    \subsection{Output Tricks}
+\par
+The bread and butter of every program. This is what you use to read from stdin and write to stdout, in the form of \code{cin} and \code{cout}. I use the headers \code{<iostream>}, \code{sstream}, and \code{<iomanip>} for this purpose. 
 
-        \code{<iomanip>} is kind enough to provide us with enough functionality for \code{cout} and other output streams to be as flexible as \code{printf}. These are passed directly to \code{cout} or any other output stream (e.g. \code{cout << setw(6)}), and include (but are not limited to):
-        
-        \begin{itemize}
-            \item \code{setbase(int n)}: changes the base that numbers are outputted in to \code{n}, so long as \code{n} is 8, 16, or 10. If you want any other base, you're going to have to write your own code.\footnote{Although base 2 is conspicuously absent from \code{setbase}, there is another solution. The idiomatic way to output an e.g. 32-bit \code{int}'s binary representation is the moderately clunky \code{int x = 53; bitset<32>(x) y; cout << y;}.}. If you want numbers to display their base (e.g. \code{0x1c}) you can pass \code{cout << showbase}, and if you stop wanting that, \code{cout << noshowbase}.
-            
-            \item \code{setw(int n)}: sets the width of the next singular object passed to \code{cout} to \code{n}. Note that things are right-justified by default; the statement \code{cout << left} will change that, and \code{cout << right} will change it back.
-            
-            \item \code{setfill(char c)}: changes the fill character (\code{' '} by default).
-            
-            \item \code{setprecision(int n)}: changes the decimal precision for subsequent floating-point values. By default, this is the number of significant digits which is almost never what you want; pass \code{cout << fixed} first to alleviate this issue.\footnote{If, for some reason, you find yourself wanting to represent floating-point numbers differently, pass \code{cout << scientific} for scientific notation, \code{hexfloat} for hexadecimal, or \code{defaultfloat} for the default float notation.}
+\subsection{Output Tricks}
 
-            \item \code{flush}: flushes the output buffer. I define \code{endl} to be \code{"{\textbackslash}n"}, trading its flushing functionality for speed, so if you need flushing for some reason, here it is.
-        \end{itemize}
+\par
+\code{<iomanip>} is kind enough to provide us with enough functionality for \code{cout} and other output streams to be as flexible as \code{printf}. These are passed directly to \code{cout} or any other output stream (e.g. \code{cout << setw(6)}), and include (but are not limited to):
 
-    \subsection{Input Tricks}
+\begin{itemize}
+	\item \code{setbase(int n)}: changes the base that numbers are outputted in to \code{n}, so long as \code{n} is 8, 16, or 10. If you want any other base, you're going to have to write your own code.\footnote{Although base 2 is conspicuously absent from \code{setbase}, there is another solution. The idiomatic way to output an e.g. 32-bit \code{int}'s binary representation is the moderately clunky \code{int x = 53; bitset<32>(x) y; cout << y;}.}. If you want numbers to display their base (e.g. \code{0x1c}) you can pass \code{cout << showbase}, and if you stop wanting that, \code{cout << noshowbase}.
+	      
+	\item \code{setw(int n)}: sets the width of the next singular object passed to \code{cout} to \code{n}. Note that things are right-justified by default; the statement \code{cout << left} will change that, and \code{cout << right} will change it back.
+	      
+	\item \code{setfill(char c)}: changes the fill character (\code{' '} by default).
+	      
+	\item \code{setprecision(int n)}: changes the decimal precision for subsequent floating-point values. By default, this is the number of significant digits which is almost never what you want; pass \code{cout << fixed} first to alleviate this issue.\footnote{If, for some reason, you find yourself wanting to represent floating-point numbers differently, pass \code{cout << scientific} for scientific notation, \code{hexfloat} for hexadecimal, or \code{defaultfloat} for the default float notation.}
+	      
+	\item \code{flush}: flushes the output buffer. I define \code{endl} to be \code{"{\textbackslash}n"}, trading its flushing functionality for speed, so if you need flushing for some reason, here it is.
+\end{itemize}
 
-        \code{cin} uses the same \code{<iomanip>} flags as \code{cout}, but with a few twists. For one, using \code{setbase(0)}, which is the default value, allows \code{cin} to infer the base of integers based on what precedes them (e.g. \code{0x} for hex). Another useful flag is \code{ws}; passing this to \code{cin} eats the whitespace.\\
+\subsection{Input Tricks}
 
-        Another useful trick for input is \code{getline(cin, s)} where \code{s} is some string. This puts the entire line, excluding the trailing newline, into \code{s}, which can then be checked to see if it is empty. A \code{stringstream} can then be constructed around \code{s} to process it; but beware as this is highly inefficient, so should only be used if there isn't a lot of input. If there is a lot of input, there is a workaround, although it gets messy: use \code{cin} to extract the normal way, then \code{getline(cin, dump)} for some random junk string, then \code{cin.peek() == \"{\textbackslash}n\"}. Not exactly elegant, but works fine.\\
+\par
+\code{cin} uses the same \code{<iomanip>} flags as \code{cout}, but with a few twists. For one, using \code{setbase(0)}, which is the default value, allows \code{cin} to infer the base of integers based on what precedes them (e.g. \code{0x} for hex). Another useful flag is \code{ws}; passing this to \code{cin} eats the whitespace.
 
-        Either \code{getline(cin, s)} or \code{cin >> x} can be wrapped in a \code{while} loop's condition, which will terminate at EOF.
+\par
+Another useful trick for input is \code{getline(cin, s)} where \code{s} is some string. This puts the entire line, excluding the trailing newline, into \code{s}, which can then be checked to see if it is empty. A \code{stringstream} can then be constructed around \code{s} to process it; but beware as this is pretty inefficient, so if there's a lot of input it might TLE. 
+
+\par
+For the annoying problems that don't specify how many test cases there are ahead of time, \code{getline(cin, s)} or \code{cin >> x} can be wrapped in a \code{while} loop's condition, which will terminate at EOF.
 
 \section{Algorithms}
+
+\subsection{Note on Functors}
+
+\par
+For many functions in \code{<algorithms>}, the default behavior can be easily overridden with a custom functor. For example, \code{sort()} sorts in ascending order by default, but passing the additional argument \code{greater<T>()} when sorting a \code{vector<T>} would sort in descending order instead. \code{greater<T>()} is a functor, which is just a class that defines \code{operator()} and can thus be used as a function.
+
+\par
+If you wanted to sort by a more complicated characteristic, you can define your own functor for that. The following code sorts a \code{vector<pii>} in descending order of the first element, with ties broken by ascending order of the second element:
+
+    \cppfile{stl/functors}
+
+\par
+I denote the functions in \code{<algorithms>} for which an optional functor argument can be passed at the end with an asterisk.
+
+
+\subsection{Sorted Data}
+
+For sorted \code{vector<T>}s \code{v} and \code{w}, and \code{T k}:
+
+\begin{itemize}
+    \item *\code{binary\_search(v.begin(), v.end(), k)} checks if \code{v} contains \code{k} ($O(\log n)$)
+    \item *\code{equal\_range(v.begin(), v.end(), k)} returns a pair of iterators in \code{v} that span the range of values equal to \code{k} ($O(\log n)$)
+    \item *\code{lower\_bound(v.begin(), v.end(), k)} returns an iterator pointing to the first element in \code{v} which is not less than \code{k} \footnote{An interesting use of this function is, on sorted or unsorted lists, finding the first element \code{x} that does not satisfy \code{P(x, k)} for some predicate function \code{P}. } ($O(\log n)$)
+    \item *\code{upper\_bound(v.begin(), v.end(), k)} is the same as \code{lower\_bound}, except it finds the first value that compares greater than \code{k} ($O(\log n)$)
+    \item *\code{merge(v.begin(), v.end(), w.begin(), w.end(), a.begin())} merges \code{v} and \code{w} into one sorted vector, putting the result into \code{a} ($O(n)$)
+    \item *\code{set\_union(v.begin(), v.end(), w.begin(), w.end(), a.begin())} finds the union of \code{v} and \code{w}, putting the result into \code{a} ($O(n)$). Other useful, similar functions are *\code{set\_intersection}, *\code{set\_difference}, and *\code{set\_symmetric\_difference}.
+\end{itemize}
 
 
 
 \section{Containers}
 
-\end{document}    
+\end{document}

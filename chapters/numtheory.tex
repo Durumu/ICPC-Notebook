@@ -21,11 +21,13 @@ Unless explicitly stated otherwise, numbers are assumed to belong to $\mathbb{N}
 
         \cppfile{numtheory/primes}
 
-    \subsection{The Sieve of Eratosthenes}
+    \subsection{Sieve of Eratosthenes}
 
-    The \textbf{sieve of Eratosthenes} is an extremely efficient and useful algorithm, finding all primes up to $n$ in $O(n\log\log{n})$.\\
+    The \textbf{sieve of Eratosthenes} is a basic prime sieve. It can find all primes up to $n$ in $O(n\log\log{n})$.\\
 
-    Generally, the obvious use is sufficient. However, sometimes, e.g. when checking a few very large numbers for primality, it is best to create a prime sieve of size $\sqrt{n}$, where $n$ is the largest number, then use the sieve to create a sorted vector of all primes up to $\sqrt{n}$ and test each of these individually. This technique is also helpful for efficient factorization of large numbers (in $O(\log n)$) through continuous division.
+    \subsection{Factorization Sieve}
+
+    There is also a linear-time sieve, suggested by 
 
     \subsection{Euler's Totient Function}
 

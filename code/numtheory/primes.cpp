@@ -7,34 +7,36 @@
 
 using namespace std;
 
-/*  prime_sieve sieves for all primes < n
+/*  prime_sieve takes a blank sieve and populates it
+    with primes
     PRECONDITION: 
-        sizeof(sieve) < n, n > 0
+        sieve.size() >= 2
     RUNTIME: 
         O (n log log n)
 */
-void prime_sieve(bool* sieve, int n) {
-    sieve[0] = false, sieve[1] = false;
-    for (int i = 2; i < n; ++i) sieve[i] = true;
-    for(int i = 2; i < (int)sqrt(n); ++i)
-        if (sieve[i]) for (int j = i*i; j < n; j+=i)
+void prime_sieve(vector<bool>& sieve) {
+    fill(sieve.begin(), sieve.end(), true);
+    sieve[0] = false;
+    sieve[1] = false;
+    for(int i = 2; i*i < sieve.size(); ++i)
+        if (sieve[i]) for (int j = i*i; j < sieve.size(); j+=i)
             sieve[j] = false;
 }
 
-/*  primes_to returns a vector of all primes <= n
-    
+/*  primes_to returns a vector of all primes < n
     PRECONDITION:
         n > 0
     RUNTIME:
         O(n log log n)
 */
-vector<int> primes_to(int n) {
-    vector<int> v;
-    bool sieve[++n];
-    prime_sieve(&sieve[0], n);
-    for (int i = 0; i < n; ++i)
-        if (sieve[i]) v.push_back(i);
-    return v;
+vector<int>& primes_to(int n) {
+    vector<bool> sieve(n);
+    vector<int> primes;
+    for (int i = 2; i*i < n; ++i) if (!sieve[i]) {
+        primes.push_back(i);
+        for (int j = i*i; j < n; j+=i) sieve[j] = true;
+    }
+    return primes;
 }
 
 /*  Euler's totient function
@@ -46,10 +48,10 @@ vector<int> primes_to(int n) {
 int phi(int n)
 {    
     int result = n;
-    int s = (int)sqrt(n);
-    bool sieve[s];
-    prime_sieve(&sieve[0], s);
-    for (int p = 0; p < s; ++p) { 
+    int sqrtn = (int)sqrt(n);
+    vector<bool> sieve(sqrtn);
+    prime_sieve(sieve);
+    for (int p = 0; p < sqrtn; ++p) { 
         if (sieve[p]) { // p is prime
             while (n % p == 0) {
                 n /= p;

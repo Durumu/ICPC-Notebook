@@ -3,7 +3,7 @@
 
 #include <vector>
 
-typedef long long u64;
+typedef long long ll;
 
 using namespace std;
 
@@ -15,17 +15,17 @@ using namespace std;
     RUNTIME:
         O(log(min(a, b)))
 */
-int euclid(int a, int b, int *x, int *y) {
+int euclid(int a, int b, int &x, int &y) {
     if (a == 0) { // base case
-        *x = 0;
-        *y = 1;
+        x = 0;
+        y = 1;
         return b;
     }
     int x1, y1; //store recursive call here
-    int gcd = euclid(b%a, a, &x1, &y1);
+    int gcd = euclid(b%a, a, x1, y1);
 
-    *x = y1 - x1*b/a; // these calls bubble down
-    *y = x1;
+    x = y1 - x1*b/a; // these calls bubble down
+    y = x1;
  
     return gcd;
 }
@@ -39,7 +39,7 @@ int euclid(int a, int b, int *x, int *y) {
 */
 int inv(int a, int m) {
     int x, y;
-    euclid(a, m, &x, &y);
+    euclid(a, m, x, y);
     return x;
 }
 
@@ -52,11 +52,11 @@ int inv(int a, int m) {
         O(n log P) where P is product of all numbers in d
 */
 int crt(vector<int> d, vector<int> a) {
-    u64 product = 1; //product across all d
+    ll product = 1; //product across all d
     for (int i = 0; i < d.size(); ++i) {
         product *= d[i];
     }
-    u64 result, pp;
+    ll result, pp;
     result = 0;
     for (int i = 0; i < d.size(); ++i) {
         pp = product / d[i];

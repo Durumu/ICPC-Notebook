@@ -1,0 +1,58 @@
+\documentclass[../main]{subfiles}
+    
+\begin{document}
+
+\section{\code{<cstdio>}}
+
+The \code{<cstdio>} library is almost one hundred times faster than \code{<iotream>}, and should be used in almost all cases.
+
+\subsection{Output}
+
+\code{printf} should always be used for output. It takes a format string with 0 or more \textit{format specifiers} which describe each of the subsequent arguments. The string is formatted according to the specifiers and printed to stdout.\\
+
+Format specifiers are of the type:\\
+\code{\%[flags][width][.precision][length]specifier}\\
+
+The most important part is the specifier character, and here are the most common ones:
+
+\begin{itemize}
+	\item \code{d}: \code{int}
+	\item \code{f}: \code{double}
+	\item \code{c}: \code{char}
+	\item \code{s}: \code{string}
+	\item \code{\\\%}: prints an actual \code{\%}
+\end{itemize}
+
+And here are some less common ones, just in case they are somehow useful:
+
+\begin{itemize}
+\item \code{x}: \code{int} (unsigned hex)
+\item \code{o}: \code{int} (unsigned octal)
+\item \code{e}: \code{double} (sci.)
+\item \code{g}: \code{double} (shortest of \code{e} or \code{f})
+\item \code{a}: \code{double} (hex)
+
+Note: capitalizing any of these letters means that it will use uppercase where possible, so \code{X} will print 3FA instead of 3fa.\\
+
+\begin{itemize}
+	\item \code{[flags]} may contain any number of these:
+	      \begin{itemize}
+		      \item \code{0}: left-pads the number with zeroes instead of spaces
+		      \item \code{-}: left-justify
+		      \item \code{+}: put a + before positive numbers
+		      \item \textit{(space)}: put a space before positive numbers
+		      \item \code{\#}: puts a \code{0x} before hexadecimal numbers, or puts a decimal point after floating-point numbers that normally would omit it
+	      \end{itemize}
+	      
+	\item \code{[width]} is either the minimum number of characters to be printed, or \code{*}, meaning the width is specified as an additional integer argument before the argument that is actually being formatted.
+	      
+	\item \code{[.precision]} contains a decimal point, then a number. This number represents the number of digits to be printed after the decimal point for floating-point specifiers other than \code{g} or \code{G} (for these, it represents the number of significant places in total). For integers, it specifies the minimum number of digits to be written (the result is padded with leading zeroes). The number may also be \code{*}, which works the same way as it does for \code{[width]}.
+	      
+	\item \code{[length]} has many features, most obsolete. For competitive programming, the only notable feature is \code{ll}, which allows \code{ll}s to be used instead of \code{int}s.
+\end{itemize}
+
+\subsection{Input}
+
+\subsubsection*{hey}
+
+\end{document}
